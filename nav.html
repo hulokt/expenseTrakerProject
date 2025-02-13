@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 100vw;
+            padding: 5px 50px;
+            top: 0;
+            left: 0;
+            transition: background-color 0.3s ease;
+            background-color: hsl(228, 38%, 10%);
+            position: fixed;
+            z-index: 1000000;
+            height: 7vh;
+        }
+        
+        
+
+        .logo {
+            display: flex;
+            flex-direction: row;
+            padding: 0.1em;
+            line-height: 1.2;
+            height: 5vh;
+            align-items: center;
+            width: 50vw;
+        }
+        .logo a{
+            text-decoration: none;
+            font-size: 1.3em; 
+            color: white;
+        }
+
+      
+        nav ul {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+            color: hsl(0, 0%, 80%);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        nav ul li a:hover {
+            color: hsl(0, 0%, 60%);
+        }
+
+      
+
+        .join a i{
+            transition: all 0.3s;
+        }
+
+        .join a i:hover{
+            opacity: 0.8;
+        }
+        
+    @media (max-width: 996px) {
+        .logo a, #logoImg{
+            text-decoration: none;
+            font-size: 1.3em; 
+        }
+
+    }
+
+
+
+
+
+      
+ 
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">
+           
+            <a id="logoText" href="index.html"> <i id="logoIcon" class="fa-brands fa-algolia" style="color: #ffffff;"></i>myExpenseGuy</a>
+        </div>
+        <div class="join">
+            <a href="account.html"><i id="logoImg" class="fa-solid fa-user" style="color: #ffffff;"></i></a>
+        </div>
+    </nav>
+
+</body>
+</html>

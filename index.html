@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Existing head content -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Font and Icon Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="website icon" href="theLogo.png">
+    <!-- Rest of your head content... -->
+    <link rel="stylesheet" href="styless.css">
+    <script>
+        window.embeddedChatbotConfig = {
+            chatbotId: "FS6QLOcI32D0ujk030JoM",
+            domain: "www.chatbase.co"
+        }
+    </script>
+    <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="FS6QLOcI32D0ujk030JoM"
+        domain="www.chatbase.co"
+        defer>
+    </script>
+</head>
+<body>
+    <!-- Navbar -->  
+    <div id="navbar"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="heroDiv hidden">
+            <div class="heromainTextDiv">
+                <h1>A new Generation <br> of Ai powered expense tracking</h1>
+                <p>Manage your finances easily with myExpenseGuy. It's your all-in-one hub for spending, saving, budgeting, investing, and more.</p>
+                <div class="joinHero">
+                    <a href="sigUp.html">
+                        <button>Start Now <i class="fa-solid fa-arrow-right" style="margin-left: 20px; padding-top: 5px; background-color:rgb(5, 119, 218); padding: 10px; border-radius: 50px;"></i></button>
+                    </a>
+                    <p style="margin-top: 10px; margin-left: 30px; font-size: 0.8rem;" class="ggp">Have an account? <a href="account.html">Log in</a></p>
+                </div>
+            </div>
+            <div class="heroImgDiv">
+                <img src="expenses-report-screen-kevinduk-removebg (1).png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container Section -->
+    <section>
+        <div class="mainContainer hidden">
+            <div class="Container">
+                <div><i class="fa-regular fa-paper-plane"></i></div>
+                <div><p>Track Expenses Easily</p></div>
+                <div><p>Keep track of your daily, weekly, and monthly expenses effortlessly with our intuitive interface!</p></div>
+            </div>
+            <div class="Container">
+                <div><i class="fa-solid fa-box-open"></i></div>
+                <div><p>Budget Management</p></div>
+                <div><p>Set budgets and manage your finances effectively to achieve your financial goals!</p></div>
+            </div>
+            <div class="Container">
+                <div><i class="fa-solid fa-phone"></i></div>
+                <div><p>Secure Data</p></div>
+                <div><p>Your financial data is encrypted and stored securely, ensuring your privacy and protection.</p></div>
+            </div>
+            <div class="Container">
+                <div><i class="fa-solid fa-gift"></i></div>
+                <div><p>Detailed Reports</p></div>
+                <div><p>Get detailed spending reports and insights to help you understand your spending habits and make informed decisions.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookies Notification -->
+    <div id="cookies" class="hidden">
+        <p style="color: #000000; font-size: 1rem;">Cookies</p>
+        <p>By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. View our Privacy Policy for more information.</p>
+        <div id="btnDiv">
+            <button id="declineCookies">Deny</button> 
+            <button id="acceptCookies">Accept</button>   
+        </div>
+    </div>
+
+    <!-- Second Section -->
+    <section style="padding-top: 70px;">
+        <div class="goalsDiv hidden">
+            <h1>Hit your budget goals in two steps</h1>
+        </div>
+        <div class="secondSecDiv">
+            <div class="allDiv hidden">
+                <div class="icon-container2">
+                    <img src="Screenshot 2024-10-23 185808.png" alt="">
+                </div>
+                <div class="secHeromainTextDiv">
+                    <div class="secHeromainText">
+                        <h1>1</h1>
+                        <h2>Track expenses, budget, and income.</h2>
+                        <p>Effective expense tracking is essential for maintaining financial stability, as it enables individuals to monitor their spending habits, identify areas for improvement, and make informed decisions to stay within their budget.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="allDiv hidden">
+                <div class="secHeromainTextDiv">
+                    <div class="secHeromainText">
+                        <h1>2</h1>
+                        <h2>Effectively manage Budget.</h2>
+                        <p>Budget management plays a crucial role in achieving financial goals, providing a clear roadmap for allocating resources, reducing unnecessary expenses, and ensuring that savings and investments are prioritized.</p>
+                    </div>
+                </div>
+                <div class="icon-container2" style="margin-left: 20px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+                    <img src="Screenshot 2024-10-23 191102.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section (if any) -->
+    <section>
+        <div class="quizDiv">
+            <!-- Content -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="import.js"></script>
+    <script src="index.js"></script>
+    <script>
+        // index.js
+
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", function() {
+    // Select all elements with the 'hidden' class
+    const hiddenElements = document.querySelectorAll('.hidden');
+    // Create an Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add the 'show' class to animate the element
+                entry.target.classList.add('show');
+                // Uncomment the next line if you want the animation to occur only once
+                // observer.unobserve(entry.target);
+            } else {
+                // Remove the 'show' class if you want the animation to reset when out of view
+                entry.target.classList.remove('show');
+            }
+        });
+    }, {
+        threshold: 0.1 // Adjust this value as needed
+    });
+
+    // Observe each hidden element
+    hiddenElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+    
+
+    </script>
+</body>
+</html>

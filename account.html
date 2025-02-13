@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Page</title>
+    <!-- Include CSS file -->
+    <link rel="stylesheet" href="account.css">
+    <link rel="website icon" href="theLogo.png">
+    <!-- Include necessary scripts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Initialize EmailJS -->
+    <script type="text/javascript">
+        (function(){
+            emailjs.init('ex9XUG1jbtDMPznE5');
+        })();
+    </script>
+    <!-- Include Chart.js and date-fns libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <!-- Include Axios from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Custom alert elements -->
+    <div id="success-alert" class="custom-success-alert" style="display: none;">
+        <span class="icon">✔</span>
+        <div class="text-container">
+          <h4>Changes saved</h4>
+          <p>Expense added successfully.</p>
+        </div>
+      </div>
+
+
+    
+    <section id="signUpSuccess">
+        <div class="AllInfoDiv">
+            <div id="userNavigatioMenuMainDiv">
+                
+                <div id="navigationButtons">
+                    <div id="userInfoDiv">
+                        <p id="userNameDisplay"></p>
+                        <button onclick="toggleTheme()"><i class="fa-solid fa-gear"></i></button>
+                    </div>
+                    
+                    <p class="selectionLabel">DASHBOARD</p>
+                    <button id="dashboardBtn" onclick="viewDashboard(); setActive(this);">
+                        <i class="fa-brands fa-squarespace fa-rotate-180" style="color: white;"></i>
+                        <h2>Dashboard</h2>
+                    </button>
+                    
+                    <p class="selectionLabel">PAGE</p>
+                    <button id="transBtn" onclick="showTransactionsPage();  setActive(this);">
+                        <i class="fa-solid fa-plus" style="color: white;"></i>
+                        <h2>Transactions</h2>
+                    </button>
+                    <p class="selectionLabel">CHARTS</p>
+                    <button id="pieBtn" onclick="showCharts('pie', ctx);  setActive(this);">
+                        <i class="fa-solid fa-chart-pie" style="color: white;"></i>
+                        <h2>Pie Chart</h2>
+                    </button>
+                  
+                    <button id="barBtn" onclick="showCharts('bar', ctx);  setActive(this);">
+                        <i class="fa-solid fa-chart-simple" style="color: white;"></i>
+                        <h2>Bar Chart</h2>
+                    </button>
+                    <button id="scatterBtn" onclick="showCharts('polarArea', ctx);  setActive(this);">
+                        <i class="fa-solid fa-circle-nodes" style="color: white;"></i>
+                        <h2>Polar Area</h2>
+                    </button>
+                    <button id="lineBtn" onclick="showCharts('line', ctx); setActive(this);">
+                        <i class="fa-solid fa-chart-line" style="color: white;"></i>
+                        <h2>Line Chart</h2>
+                    </button>
+                </div>
+                <div id="logoDiv">
+                    <a href="index.html" style="display: flex;">
+                        <i class="fa-brands fa-algolia" style="color: #ffffff;"></i>
+                        <h1>myExpenseGuy</h1>
+                    </a>
+                </div>
+            </div>
+
+            <div id="rightContent">
+
+                <div id="dashboardDiv" style="display: none;">
+                    <div id="dashBoardDiv1">
+                        <div id="dashboardUserInfoMainDivLeft">
+                            <div style=" text-align: left; display: flex;">
+                                <h1 style="color: var(--black-color);">Your Profile</h1>
+                            </div>
+
+                            <div id="userInfoCards">
+                                <div class="card" style="background-color: hsl(255, 96%, 95%)">
+                                    <i class="fa-solid fa-money-bill-transfer" style="background-color: hsl(255, 94%, 70%); color: white; padding: 10px; border-radius: 50px;"></i>
+                                    <p style="font-size: 1.3rem;" id="dashBoardIncomeDisplay">$0</p>
+                                    <p style="font-size: 0.8rem; color: hsla(0, 0%, 0%, 0.411);">Income</p>
+                                </div>
+                                <div class="card" style="background-color: hsl(9, 100%, 90%)">
+                                    <i class="fa-solid fa-receipt" style="background-color: #e61919; color: white; padding: 10px; border-radius: 50px;" ></i>
+                                    <p style="font-size: 1.3rem;" id="dashBoardExpensesDisplay">$0</p>
+                                    <p style="font-size: 0.8rem; color: hsla(0, 0%, 0%, 0.411);">Total Expenses</p>
+                                </div>
+                                <div class="card" style="background-color: hsl(130, 100%, 90%)">
+                                    <i class="fa-solid fa-wallet" style="background-color: #16e33f; color: white; padding: 10px; border-radius: 50px;"></i>
+                                    <p style="font-size: 1.3rem;" id="dashBoardBalanceDisplay">$0</p>
+                                    <p style="font-size: 0.8rem; color: hsla(0, 0%, 0%, 0.411);">Balace</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dashboardUserInfoMainDivRight"> 
+                            <div style=" text-align: left; display: flex;">
+                                <h1 style="color: var(--black-color);">Expenses Rate</h1>
+                            </div>
+                            
+                            <canvas id="chart3" style="display: none;"></canvas>
+                        </div>
+                    </div>
+
+
+                    <div id="dashBoardDiv2" style="margin-top: 100px;">
+                        <div style="width: 60%;">
+                            <canvas id="chart4" style="display: none; "></canvas>
+                        </div>
+                        <div style="width: 30%;">
+                            <canvas id="chart1" style="display: none;"></canvas>
+                        </div>                      
+                        
+                    </div>
+                    
+                </div>
+                
+                <div id="transactionDiv">
+                    <div id="transactionsPage">
+                        <div class="input-section" id="inputSection">
+                            <div>
+                                <label for="category-select">Category:</label>
+                                <select id="categorySelect">
+                                    <option value="">Select Category</option>
+                                    <option value="Food & Beverage">Food & Beverage</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Insurance">Insurance</option>
+                                    <option value="Personal Care">Personal Care</option>
+                                    <option value="Subscriptions">Subscriptions</option>
+                                    <option value="Gifts & Donations">Gifts & Donations</option>
+                                    <option value="Household Items">Household Items</option>
+                                    <option value="Travel">Travel</option>
+                                    <option value="Groceries">Groceries</option>
+                                    <option value="Fitness & Gym">Fitness & Gym</option>
+                                    <option value="Pet Care">Pet Care</option>
+                                    <option value="Entertainment & Leisure">Entertainment & Leisure</option>
+                                    <option value="Childcare">Childcare</option>
+                                </select>
+                            </div>
+
+                            <button onclick="addNewCategory()" id="addCategoryBtn">+</button>
+
+                            <!-- Updated ID for the "Add New Category" Modal -->
+                            <div class="overlay" style="display: none;" id="addCategoryModal">
+                                <div id="newCategoryDiv">
+                                    <span class="close" id="closeCategorySelectBtn">&times;</span>
+                                    <p>ADD A NEW CATEGORY</p>
+                                    <input id="CategoryInput" type="text" placeholder="Category Name" style="padding: 10px; font-size: 1rem; margin-top: 20px;">
+                                    <button id="saveCategoryBtn">Save</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="amount-input">Amount:</label>
+                                <input type="number" id="amountInput" placeholder="Type an amount">
+                            </div>
+                            <div>
+                                <label for="date-input">Date:</label>
+                                <input type="date" id="date-input">
+                            </div>
+                            <button onclick="addExpense()" id="addBtn" class="addExpenseBtn">Add</button>
+                        </div>
+                    </div>
+                    <div class="infoDiv">
+                        <div id="card">
+                            <div class="cardImgDiv">
+                                <button onclick="editIncome()" "><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                            <div>
+                                <h3>Monthly Income</h3>
+                                <p id="currentIncomeDisplay">$0</p>
+                            </div>
+                            <div id="incomeModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <input placeholder="Type Your Monthly Income" type="number" id="incomeInput">
+                                    <button class="save-btn" id="saveIncome">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="card">
+                            <div class="cardImgDiv">
+                                <i class="fa-solid fa-dollar-sign" style="font-size: 1.2rem;"></i>
+                            </div>
+                            <div>
+                                <h3>Total Expenses</h3>
+                                <p id="totalExpensesDisplay" style="color: tomato;">$0</p>
+                            </div>
+                        </div>
+                        <div id="card">
+                            <div class="cardImgDiv">
+                                <i class="fa-solid fa-wallet" style="font-size: 1.2rem;"></i>
+                            </div>
+                            <div>
+                                <h3>Current Balance</h3>
+                                <p id="currentBalanceDisplay" style="color: rgb(122, 170, 128);">$0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="displayDataDiv">
+                        <div class="expenses-list" id="tableDiv">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expensesTableBody"></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td id="totalAmount" style="color: tomato;"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <canvas id="chart" style="max-height: 60vh; max-width: 70vw; display: none; background-color: var(--background-color); border-radius: 20px; padding: 10px; margin: 20px;" ></canvas>
+                
+                
+
+            </div>
+
+        </div>
+    </section>
+    <!-- Include your JavaScript files -->
+    <script src="import.js"></script>
+    <script src="account.js"></script>
+</body>
+</html>

@@ -1,0 +1,822 @@
+/* Define color variables */
+:root {
+    --background-color: #fff;
+    --black-color: black;
+    --border-bottom-color: rgba(255, 255, 255, 0.397);
+    --border-color: #888;
+    --border-light: #ddd;
+    --dark-gray: hsl(0, 0%, 30%);
+    --delete-btn-color: rgb(218, 83, 59);
+    --expense-delete-color: #f44336;
+    --gradient-end: rgba(187, 189, 225, 1);
+    --gradient-start: rgba(23, 103, 210, 1);
+    --hover-color: hsl(210, 100%, 17%);
+    --light-gray: hsl(0, 0%, 95%);
+    --medium-gray: hsl(0, 0%, 64%);
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --overlay-color: rgba(0, 0, 0, 0.7);
+    --primary-color: #003366;
+    --rightContentBackgroundColor: hsl(0, 0%, 100%);
+    --save-btn-color: #000000;
+    --secondary-color: #002448;
+    --shadow-color: rgba(0, 0, 0, 0.24);
+    --text-color: white;
+    --text-color-secondary: #aaa;
+    --text-color-semi: #ffffffad;
+}
+
+.dark-theme {
+    --background-color: #121212;
+    --black-color: #ffffff;
+    --border-bottom-color: rgba(255, 255, 255, 0.2);
+    --border-color: #444;
+    --border-light: #555;
+    --dark-gray: hsl(0, 0%, 39%);
+    --delete-btn-color: rgb(200, 50, 50);
+    --expense-delete-color: #e57373;
+    --gradient-end: rgba(100, 100, 100, 1);
+    --gradient-start: rgba(50, 50, 50, 1);
+    --hover-color: hsl(210, 5%, 30%);
+    --light-gray: hsl(0, 0%, 20%);
+    --medium-gray: hsl(0, 0%, 50%);
+    --modal-background: rgba(255, 255, 255, 0.1);
+    --overlay-color: rgba(0, 0, 0, 0.9);
+    --primary-color: #1e1e1e;
+    --rightContentBackgroundColor: hsl(0, 0%, 17%);
+    --save-btn-color: #ffffff;
+    --secondary-color: #2c2c2c;
+    --shadow-color: rgba(0, 0, 0, 0.7);
+    --text-color: #e0e0e0;
+    --text-color-secondary: #b3b3b3;
+    --text-color-semi: rgba(224, 224, 224, 0.7);
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    font-family: "Parkinsans", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--rightContentBackgroundColor);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+/* Success Alert */
+.custom-success-alert {
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    left: 56%;
+    max-width: 90%;
+    padding: 20px 30px;
+    position: fixed;
+    top: 20px;
+    transform: translateX(-50%);
+    width: 400px;
+    z-index: 9999;
+}
+
+.custom-success-alert .icon {
+    color: #05ff58;
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.custom-success-alert .text-container {
+    flex-grow: 1;
+}
+
+.custom-success-alert .text-container h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.custom-success-alert .text-container p {
+    color: #c0c0c0;
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -30px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Main Layout */
+.AllInfoDiv {
+    display: flex;
+}
+
+#userNavigatioMenuMainDiv {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    min-width: 13vw;
+    padding: 20px;
+}
+
+#navigationButtons {
+    display: flex;
+    flex-direction: column;
+}
+
+#userInfoDiv {
+    border-bottom: 1px solid var(--border-bottom-color);
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 20px;
+}
+
+#userInfoDiv p,
+#userInfoDiv i {
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+#userInfoDiv p {
+    font-weight: 400;
+}
+
+#logoDiv {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 30px;
+    text-align: center;
+    width: 100%;
+}
+
+#logoDiv a {
+    text-decoration: none;
+}
+
+#logoDiv a h1 {
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+/* Navigation Buttons */
+#navigationButtons button {
+    align-items: center;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: left;
+    padding: 0 10px;
+    transition: all 0.3s;
+}
+
+#navigationButtons button.active {
+    background-color: var(--secondary-color);
+}
+
+#navigationButtons button:hover {
+    background-color: var(--hover-color);
+}
+
+#navigationButtons button h2 {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 10px;
+}
+
+.selectionLabel {
+    color: var(--text-color-semi);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 20px 0 15px;
+}
+
+/* Right Content */
+#rightContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5vw;
+    margin-top: 20px;
+    max-height: fit-content;
+    width: 80vw;
+}
+
+/* Dashboard Section */
+#dashboardDiv {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+}
+
+#dashBoardDiv1 {
+    display: flex;
+    gap: 10vw;
+    height: 300px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#dashboardUserInfoMainDivLeft {
+    background: hsla(0, 0%, 0%, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    width: 50%;
+}
+
+#userInfoCards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    align-items: flex-start;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-around;
+    padding: 25px;
+    width: 30%;
+}
+
+
+
+#dashboardUserInfoMainDivRight {
+    background: hsla(0, 0%, 0%, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    width: 50%;
+}
+
+#dashboardUserInfoMainDivRight canvas {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 20px;
+    width: 20px;
+}
+
+#dashBoardDiv2 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    width: 95%;
+}
+
+#dashBoardDiv2 canvas {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Transaction Section */
+#transactionDiv {}
+
+#transactionsPage {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.input-section {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.input-section div {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.input-section label {
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.input-section input[type="number"],
+.input-section input[type="date"] {
+    font-size: 1rem;
+    margin: 0 10px;
+    outline: none;
+    padding: 5px;
+    transition: width 0.8s ease;
+}
+
+.input-section input[type="date"] {
+    cursor: pointer;
+}
+
+.input-section button {
+    border: none;
+    cursor: pointer;
+}
+
+#categorySelect {
+    cursor: pointer;
+    margin: 0 10px;
+    padding: 5px;
+    transition: width 0.8s ease;
+}
+
+#addCategoryBtn {
+    background-color: #00000000;
+    color: var(--black-color);
+    cursor: pointer;
+    margin-left: 0px;
+    margin-right: 10px;
+    padding: 5px;
+    transition: width 0.8s ease;
+}
+
+.addExpenseBtn {
+    align-items: center;
+    background-image: linear-gradient(133deg, var(--gradient-start) 23%, var(--gradient-end) 87%), linear-gradient(82deg, var(--gradient-start) 23%, var(--gradient-end) 87%);
+    border-radius: 46px;
+    color: var(--text-color);
+    display: flex;
+    font-size: 18px;
+    height: 100px;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    transition: 0.3s;
+    width: 100px;
+}
+
+.addExpenseBtn:hover {
+    box-shadow: 0 0 rgba(0, 0, 0, 0);
+    transform: translateY(2px);
+}
+
+/* Info Cards */
+.infoDiv {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
+    width: 100%;
+}
+
+#card {
+    align-items: center;
+    background-color: var(--light-gray);
+    box-shadow: var(--shadow-color) 0px 3px 8px;
+    color: var(--black-color);
+    display: flex;
+    height: 5vh;
+    justify-content: space-around;
+    margin: 10px;
+    padding: 30px 10px;
+    text-align: center;
+    transition: all 0.3s;
+    width: 235px;
+}
+
+#card button {
+    background-color: #00000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 10px;
+    transition: all 0.3s;
+}
+
+#card button i {
+    color: var(--black-color);
+}
+
+#card button:hover {
+    opacity: 0.8;
+}
+
+#card h3 {
+    font-size: 0.8rem;
+    font-weight: 400;
+    user-select: none;
+}
+
+#card p {
+    font-size: 1.2rem;
+    user-select: none;
+}
+
+#incomeInput {
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Display Data */
+.displayDataDiv {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+}
+
+.expenses-list {
+    box-sizing: border-box;
+    flex: 1;
+    margin-right: 20px;
+    max-width: 90%;
+}
+
+table {
+    border-collapse: collapse;
+    height: 100%;
+    width: 100%;
+}
+
+th {
+    background-color: var(--dark-gray);
+    color: var(--text-color);
+}
+
+th,
+td {
+    border: 1px solid var(--border-light);
+    padding: 8px;
+    text-align: left;
+}
+
+td {
+    color: var(--black-color);
+}
+
+tfoot td {
+    font-weight: bold;
+}
+
+#expensesTableBody tr {
+    height: 50px;
+}
+
+/* Modals and Overlays */
+.modal {
+    align-items: center;
+    background-color: var(--overlay-color);
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    margin: 15% auto;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+}
+
+.overlay {
+    align-items: center;
+    background-color: var(--overlay-color);
+    bottom: 0;
+    color: var(--black-color);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+#newCategoryDiv {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    margin: 15% auto;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+}
+
+#newCategoryDiv button {
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--black-color);
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+.close {
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 90%;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--black-color);
+    text-decoration: none;
+}
+
+/* Buttons */
+.delete-btn {
+    background-color: var(--expense-delete-color);
+    border: none;
+    border-radius: 4px;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.deleteBtn {
+    background-color: var(--delete-btn-color);
+    border: none;
+    border-radius: 10px;
+    color: var(--text-color);
+    cursor: pointer;
+    height: 35px;
+    transition: all 0.3s;
+    width: 100px;
+}
+
+.deleteBtn:hover {
+    opacity: 0.8;
+}
+
+.save-btn {
+    background-color: var(--save-btn-color);
+    border: none;
+    color: var(--black-color);
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+/* Labels */
+label {
+    color: var(--black-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 1003px) {
+    /* Adjustments for small screens */
+    #userNavigatioMenuMainDiv {
+        max-width: 15vw;
+    }
+
+    #navigationButtons {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #navigationButtons button {
+        justify-content: center;
+        margin: 10px 0;
+        width: 9%;
+    }
+
+    #navigationButtons button h2 {
+        display: none;
+    }
+
+    #navigationButtons button i {
+        margin: 10px;
+    }
+
+    .selectionLabel {
+        display: none;
+    }
+
+    #logoDiv {
+        display: flex;
+        margin-bottom: 40px;
+        margin-top: 10px;
+        padding-left: 0px;
+    }
+
+    #logoDiv a h1 {
+        display: none;
+    }
+
+    #userInfoDiv {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #userInfoDiv p,
+    #userInfoDiv i {
+        font-size: 0.8rem;
+    }
+
+    #rightContent {
+        margin: 1px;
+    }
+
+    .input-section {
+        align-items: center;
+        color: #000;
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+    }
+
+    .input-section div {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        width: 70vw;
+    }
+
+    .input-section input[type="number"],
+    .input-section input[type="date"],
+    #categorySelect {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        width: 70vw;
+    }
+
+    .addExpenseBtn {
+        margin-top: 20px;
+    }
+
+    .infoDiv {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #card {
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        margin: 10px 0;
+        width: 90%;
+    }
+
+    .displayDataDiv {
+        flex-direction: column;
+    }
+
+    .expenses-list {
+        margin: 20px;
+        margin-bottom: 60px;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px;
+        width: 100%;
+    }
+
+    th,
+    td {
+        white-space: nowrap;
+    }
+
+    /* Dashboard Adjustments */
+    #dashBoardDiv1 {
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #dashboardUserInfoMainDivLeft,
+    #dashboardUserInfoMainDivRight {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+        width: 100%;
+    }
+
+    #dashboardUserInfoMainDivLeft h1,
+    #dashboardUserInfoMainDivRight h1 {
+        text-align: center;
+    }
+
+    #userInfoCards {
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        padding: 0;
+        width: 100%;
+    }
+
+    .card {
+        align-items: center;
+        margin-bottom: 20px;
+        width: 80%;
+    }
+    #dashBoardDiv2 {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    #dashBoardDiv2 > div {
+        display: flex;
+        justify-content: center;
+        width: 100% !important;
+    }
+
+    #dashBoardDiv2 canvas {
+        height: auto !important;
+        max-width: none;
+        width: 100% !important;
+    }
+
+    /* Modals */
+    .modal-content,
+    #newCategoryDiv {
+        background-color: var(--background-color);
+        margin: 20% auto;
+        padding: 15px;
+        width: 90%;
+    }
+
+    .close {
+        color: var(--text-color-secondary);
+        font-size: 24px;
+        margin-left: 85%;
+    }
+
+    .modal-content input,
+    #newCategoryDiv input {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .modal-content button,
+    #newCategoryDiv button {
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+    }
+}
